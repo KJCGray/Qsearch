@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube熱門影片</title>
+    <style>
+      #bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%; /* Set width to 100% to fill the container */
+      }
+    </style>
+  </head>
+  <body style="text-align: center">
+    <div style="width: auto; text-align: center">
+      <a>Youtube熱門影片</a>
+      <a style="font-size: 14px; color: cornflowerblue">hololive</a>
+    </div>
+
+    <div id="videoList"></div>
+
+    <script src="data.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var videoList = document.getElementById("videoList");
+        videoData.forEach(function (video, index) {
+          var videoIndex = index + 1;
+          videoList.innerHTML += `
+          <div style="border:2px solid #BEBEBE; border-radius:10px; width:220px; height:430px; padding-top:4px; display:inline-block; vertical-align: top; box-sizing:border-box; margin-top:20px; position:relative;">
+              <img src="${video.thumbnail_image}" alt="Thumbnail" style="width:200px; font-size:0px;" />
+              <a href="${video.permalink}" style="margin-right:auto; color:black; font-weight:bold;">${video.from_name}</a>
+              <p>${video.title}</p>  
+              <div id="bottom">
+                <div style="border-top:1px solid black; padding-top:6px; margin-bottom:8px;">
+                    <img src="like.png" alt="like" style="width:20px" />
+                    <a>${video.like_count}</a>
+                    <img src="watch.png" alt="view" style="width:20px" />
+                    <a>${video.view_count}</a>
+                </div>
+                <div style="border-top:1px solid black; margin-bottom:8px;  margin-top:8px; padding-top:6px;">
+                    <a style=" color: cornflowerblue">#${videoIndex}</a>
+                    <a style=" color: cornflowerblue">觀看數: ${video.view_count}</a>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      });
+    </script>
+  </body>
+</html>
